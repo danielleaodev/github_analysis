@@ -1,0 +1,11 @@
+index,total_repos_analyzed,popular_language_counts,other_languages_count
+Python,100,15,31
+TypeScript,100,14,31
+JavaScript,100,14,31
+C++,100,7,31
+Go,100,6,31
+Java,100,5,31
+Shell,100,4,31
+C,100,2,31
+C#,100,1,31
+PHP,100,1,31

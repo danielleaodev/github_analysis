@@ -1,6 +1,6 @@
 import pandas as pd
 from datetime import datetime
-from utils.utils import log_error, save_to_json
+from utils.utils import log_error
 from utils.custom_exceptions import DataProcessingError
 
 class DataProcessor:
@@ -53,38 +53,22 @@ class DataProcessor:
                     data["closed_issues"].append(closed_issues_count)
                     data["issue_closure_ratio"].append(closure_ratio)
 
-            df = pd.DataFrame(data)
+            self.data = pd.DataFrame(data)
 
-            df['age'] = pd.to_numeric(df['createdAt'].apply(lambda x: datetime.now().year - datetime.strptime(x, "%Y-%m-%dT%H:%M:%SZ").year), errors='coerce')
-            df['last_update'] = pd.to_numeric((pd.to_datetime('now') - pd.to_datetime(df['updatedAt']).dt.tz_localize(None)).dt.days, errors='coerce')
+            # Adicionar e processar colunas derivadas
+            self.data['age'] = pd.to_numeric(self.data['createdAt'].apply(lambda x: datetime.now().year - datetime.strptime(x, "%Y-%m-%dT%H:%M:%SZ").year), errors='coerce')
+            self.data['last_update'] = pd.to_numeric((pd.to_datetime('now') - pd.to_datetime(self.data['updatedAt']).dt.tz_localize(None)).dt.days, errors='coerce')
 
-            self.data = df
-            return df
+            return self.data
 
         except Exception as e:
             log_error(f"Unexpected error during data processing: {e}")
             raise DataProcessingError(message=str(e))
 
-    def save_to_csv(self, filename='processed_data.csv'):
+    def save_to_csv(self, file_path):
         try:
-            self.data.to_csv(filename, index=False)
-            print(f"Data saved to {filename}")
+            self.data.to_csv(file_path, index=False)
+            print(f"Data saved to {file_path}")
         except Exception as e:
-            log_error(f"Failed to save data to CSV: {e}")
+            log_error(f"Error saving data to CSV: {e}")
             raise
-
-# Exemplo de uso no main.py
-if __name__ == "__main__":
-    processor = DataProcessor()
-    processed_data = processor.process_raw_data(raw_data)  # Suponha que raw_data já tenha sido coletado
-    processor.save_to_csv('processed_data.csv')
-
-    general_analysis = {
-        "median_age": processor.calculate_maturity(),
-        "median_pull_requests": processor.calculate_contribution(),
-        "median_releases": processor.calculate_releases(),
-        "median_update_frequency": processor.calculate_update_frequency(),
-        "median_issue_closure_ratio": processor.calculate_issue_closure()
-    }
-
-    save_to_json(general_analysis, 'general_analysis.json')

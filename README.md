@@ -7,7 +7,7 @@ Este projeto coleta e analisa dados dos 1000 repositórios mais populares do Git
 - `collectors/`: Contém o código para coletar dados do GitHub.
 - `processors/`: Contém o código para processar os dados brutos.
 - `analyzers/`: Contém o código para analisar os dados processados.
-- `utils/`: Contém funções utilitárias para salvar e carregar dados.
+- `utils/`: Contém funções utilitárias para gerar e salvar logs.
 - `main.py`: Script principal que orquestra a coleta, processamento e análise de dados.
 
 ## Como Executar

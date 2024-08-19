@@ -22,23 +22,28 @@ class DataAnalyzer:
 
     def analyze_by_language(self):
         try:
-            numeric_columns = ['age', 'pullRequests', 'releases', 'last_update', 'issue_closure_ratio']
+            # Top 10 linguagens mais populares
+            top_languages = [
+                'JavaScript', 'Python', 'TypeScript', 'Java', 'C#',
+                'C++', 'PHP', 'C', 'Shell', 'Go'
+            ]
 
-            # Verifique se as colunas estão presentes e são numéricas
-            for column in numeric_columns:
-                if column not in self.processed_data.columns:
-                    raise ValueError(f"Column {column} is missing in the processed data.")
+            # Contagem de repositórios por linguagem
+            language_counts = self.processed_data['primaryLanguage'].value_counts()
 
-            for column in numeric_columns:
-                self.processed_data[column] = pd.to_numeric(self.processed_data[column], errors='coerce')
+            # Filtro para considerar apenas as linguagens mais populares
+            popular_language_counts = language_counts[language_counts.index.isin(top_languages)]
 
-            language_analysis = self.processed_data.groupby('primaryLanguage')[numeric_columns].median()
-
-            if language_analysis.empty:
-                raise ValueError("The result of the language analysis is empty. Check the data processing steps.")
+            # Preparar o resultado para retorno
+            language_analysis = {
+                "total_repos_analyzed": len(self.processed_data),
+                "popular_language_counts": popular_language_counts.to_dict(),
+                "other_languages_count": language_counts[~language_counts.index.isin(top_languages)].sum()
+            }
 
             return language_analysis
 
         except Exception as e:
             log_error(f"Error during language analysis: {e}")
             raise
+

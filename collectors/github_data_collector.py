@@ -1,6 +1,6 @@
 import requests
 from utils.custom_exceptions import GitHubAPIError
-from utils.utils import log_error, retry_on_failure
+from utils.utils import log_error
 
 class GitHubDataCollector:
     def __init__(self, token):
@@ -14,14 +14,14 @@ class GitHubDataCollector:
                 result = response.json()
                 if 'errors' in result:
                     log_error(f"GraphQL errors: {result['errors']}")
-                    raise Exception("API returned errors:", result['errors'])
+                    raise GitHubAPIError(status_code=response.status_code, message="API returned errors")
                 return result
             else:
                 log_error(f"Failed request with status code: {response.status_code}")
-                raise Exception(f"Query failed with code {response.status_code}: {response.text}")
+                raise GitHubAPIError(status_code=response.status_code)
         except requests.exceptions.RequestException as e:
             log_error(f"RequestException: {e}")
-            raise
+            raise GitHubAPIError(status_code=response.status_code, message=str(e))
 
     def get_repositories(self, num_repos, batch_size=20):
         all_repositories = []
