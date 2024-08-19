@@ -23,6 +23,7 @@ Este projeto coleta e analisa dados dos 1000 repositórios mais populares do Git
 Python 3.x
 requests
 pandas
+python-dotenv
 
 ```bash
 python main.py

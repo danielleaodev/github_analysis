@@ -4,12 +4,22 @@ from processors.data_processor import DataProcessor
 from analyzers.data_analyzer import DataAnalyzer
 from utils.utils import setup_logging, log_error
 from utils.custom_exceptions import GitHubAPIError, DataProcessingError, DataAnalysisError
+from dotenv import load_dotenv
+import os
 
 def main():
     setup_logging()
     
+    # Carregar variáveis de ambiente do arquivo .env
+    load_dotenv()
+    
     try:
-        token = "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"  # Substitua pelo seu token de acesso do GitHub
+        # Obter o token da variável de ambiente
+        token = os.getenv("GITHUB_TOKEN")
+        
+        if not token:
+            raise ValueError("GitHub token não encontrado. Defina a variável de ambiente 'GITHUB_TOKEN'.")
+        
         collector = GitHubDataCollector(token)
         raw_data = collector.get_repositories(num_repos=100)
 
