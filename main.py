@@ -21,7 +21,7 @@ def main():
             raise ValueError("GitHub token não encontrado. Defina a variável de ambiente 'GITHUB_TOKEN'.")
         
         collector = GitHubDataCollector(token)
-        raw_data = collector.get_repositories(num_repos=100)
+        raw_data = collector.get_repositories(num_repos=1000)
 
         processor = DataProcessor()
         processed_data = processor.process_raw_data(raw_data)

@@ -40,7 +40,8 @@ class DataProcessor:
                     total_issues_count = repo.get("issues", {}).get("totalCount", 0)
                     closed_issues_count = repo.get("closedIssues", {}).get("totalCount", 0)
 
-                    closure_ratio = closed_issues_count / total_issues_count if total_issues_count > 0 else None
+                    closure_ratio = closed_issues_count / total_issues_count if total_issues_count > 0 else 0
+
 
                     data["name"].append(name)
                     data["createdAt"].append(created_at)
@@ -55,9 +56,11 @@ class DataProcessor:
 
             self.data = pd.DataFrame(data)
 
-            # Adicionar e processar colunas derivadas
+             # Adicionar e processar colunas derivadas
             self.data['age'] = pd.to_numeric(self.data['createdAt'].apply(lambda x: datetime.now().year - datetime.strptime(x, "%Y-%m-%dT%H:%M:%SZ").year), errors='coerce')
-            self.data['last_update'] = pd.to_numeric((pd.to_datetime('now') - pd.to_datetime(self.data['updatedAt']).dt.tz_localize(None)).dt.days, errors='coerce')
+            
+            # Corrigir a diferença de tempo para last_update
+            self.data['last_update'] = (pd.Timestamp.now(tz='UTC') - pd.to_datetime(self.data['updatedAt'], utc=True)).dt.days
 
             return self.data
 

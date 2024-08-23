@@ -1,5 +1,6 @@
 import requests
 from utils.custom_exceptions import GitHubAPIError
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
 from utils.utils import log_error
 
 class GitHubDataCollector:
@@ -9,7 +10,12 @@ class GitHubDataCollector:
     
     def execute_query(self, query):
         try:
-            response = requests.post(self.api_url, json={'query': query}, headers=self.headers)
+             # Suprimir avisos de certificado SSL inválido
+            requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+
+            # Fazer a requisição HTTP para a API do GitHub, ignorando a verificação do SSL
+            response = requests.post(self.api_url, json={'query': query}, headers=self.headers, verify=False)
+
             if response.status_code == 200:
                 result = response.json()
                 if 'errors' in result:
