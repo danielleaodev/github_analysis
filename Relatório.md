@@ -43,19 +43,19 @@ Para cada uma das questões de pesquisa, os seguintes resultados foram obtidos:
 
 1. **Maturidade dos Sistemas Populares:**
    - *Métrica:* Idade mediana do repositório
-   - *Resultado:* A idade mediana dos repositórios é de 8 anos.
+   - *Resultado:* A idade mediana dos repositórios é de **8 anos**.
 
 2. **Contribuição Externa:**
    - *Métrica:* Total de pull requests aceitas
-   - *Resultado:* A mediana de pull requests aceitas é de 577,5.
+   - *Resultado:* A mediana de pull requests aceitas é de **577,5**.
 
 3. **Frequência de Lançamentos:**
    - *Métrica:* Total de releases
-   - *Resultado:* A mediana do número de releases é de 30.
+   - *Resultado:* A mediana do número de releases é de **30**.
 
 4. **Frequência de Atualizações:**
    - *Métrica:* Tempo até a última atualização
-   - *Resultado:* A mediana do tempo desde a última atualização é de 0 dias (indicando atualizações frequentes).
+   - *Resultado:* A mediana do tempo desde a última atualização é de **0 dias** (indicando atualizações frequentes).
 
 5. **Linguagens de Programação:**
    - *Métrica:* Linguagem primária de cada repositório
@@ -68,7 +68,7 @@ Para cada uma das questões de pesquisa, os seguintes resultados foram obtidos:
 
 6. **Percentual de Issues Fechadas:**
    - *Métrica:* Razão entre número de issues fechadas e o total de issues
-   - *Resultado:* A mediana do percentual de issues fechadas é de 86%.
+   - *Resultado:* A mediana do percentual de issues fechadas é de **86%**.
 
 ## Discussão
 
