@@ -18,12 +18,15 @@ Este projeto coleta e analisa dados dos 1000 repositórios mais populares do Git
 4. Execute o script `main.py`.
     
     Os resultados da análise serão salvos nos arquivos general_analysis.json e language_analysis.json.
-
 ## * Dependências
-Python 3.x
-requests
-pandas
-python-dotenv
+- Python 3.x
+- requests
+- pandas
+- python-dotenv
+   
+## Relatório
 
-```bash
-python main.py
+- O relatório com as analises dos dados encontrados se encontra no arquivo `relatorio.md`. Nele, estão contempladas algumas hipóteses de respostas às perguntas levantadas no enunciado juntamente à uma discussão dos resultados obtidos.
+    
+
+
