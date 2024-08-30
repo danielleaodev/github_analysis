@@ -18,11 +18,13 @@ Este projeto coleta e analisa dados dos 1000 repositórios mais populares do Git
 4. Execute o script `main.py`.
     
     Os resultados da análise serão salvos nos arquivos general_analysis.json e language_analysis.json.
-## * Dependências
+## * Dependências/Versão
 - Python 3.x
-- requests
-- pandas
-- python-dotenv
+- requests 2.32.3
+- pandas 2.2.2
+- python-dotenv 1.0.1
+- matplotlib 3.9.2
+- seaborn 0.13.2
    
 ## Relatório
 
