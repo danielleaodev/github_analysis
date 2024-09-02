@@ -84,9 +84,9 @@ Para cada uma das questões de pesquisa, os seguintes resultados foram obtidos:
 # Data Viz e Análise dos Resultados
 
 ## Visuais
-![Análise Geral](utils/Dashboard%20de%20Análise%20de%20Repositórios%20Populares%20no%20Github.png)
+![Análise Geral](Dashboard%20de%20Análise%20de%20Repositórios%20Populares%20no%20Github.png)
 
-![Análise Requisito extra](utils/Análise%20requisito%20extra.png)
+![Análise Requisito extra](Análise%20requisito%20extra.png)
 
 
 ## Discussão
